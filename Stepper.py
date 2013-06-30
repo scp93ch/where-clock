@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+# This code is written by Stephen C Phillips.
+# It is in the public domain, so you can do what you like with it
+# but a link to http://scphillips.com would be nice.
+
+# It works on the Raspberry Pi computer with the standard Debian Wheezy OS and
+# the 28BJY-48 stepper motor with ULN2003 control board.
+
 from time import sleep
 import RPi.GPIO as GPIO
 
@@ -22,6 +29,8 @@ class Motor(object):
         # T is the amount of time to stop between signals
         self._T = (60.0 / rpm) / self.steps_per_rev
 
+    # This means you can set "rpm" as if it is an attribute and
+    # behind the scenes it sets the _T attribute
     rpm = property(lambda self: self._rpm, _set_rpm)
 
     def move_to(self, angle):

@@ -19,9 +19,9 @@ motor.rpm = 5
 # Set up the clock locations:
 location = {
     'home': 0,
-    'woodcraft': 45,
+    'woodcraft': 45,  # A cooperative childrens' organisation, see http://woodcraft.org
     'work': 90,
-    'pub': 135,  # this is more of an aspration than a location
+    'pub': 135,  # this is more of an aspiration than a location
     'salsa': 180,
     'pilates': 225,
     'travelling': 270,
@@ -33,11 +33,11 @@ host = ''  # do we need socket.gethostname() ?
 port = 4387
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((host, port))
-sock.listen(1)  # don't queue up any requests
+sock.listen(1)  # don't queue up any requests, this is not a high traffic web service...
 
 # pygame things for sound
 pygame.init()
-sound = pygame.mixer.Sound('/home/pi/whereClock/ZINGBONK.WAV')
+sound = pygame.mixer.Sound('/home/pi/where-clock/ZINGBONK.WAV')
 
 print "Server running on port " + `port`
 
