@@ -10,7 +10,8 @@
 # Description:       An interpretation of the clock in Weasley house (Harry Potter) that moves to show where members of the family are
 ### END INIT INFO
 
-DAEMON=/home/pi/where-clock/whereclock.py
+DIR=/usr/local/bin/whereclock
+DAEMON=$DIR/whereclock.py
 DAEMON_USER=root
 DAEMON_NAME=whereclock
 PIDFILE=/var/run/$DAEMON_NAME.pid
@@ -18,12 +19,12 @@ PIDFILE=/var/run/$DAEMON_NAME.pid
 . /lib/lsb/init-functions
 
 do_start () {
-    log_daemon_msg "Starting system $DAEMON_NAME Daemon"
+    log_daemon_msg "Starting system $DAEMON_NAME daemon"
     start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile $PIDFILE --user $DAEMON_USER --startas $DAEMON
     log_end_msg $?
 }
 do_stop () {
-    log_daemon_msg "Stopping system $DAEMON_NAME Daemon"
+    log_daemon_msg "Stopping system $DAEMON_NAME daemon"
     start-stop-daemon --stop --pidfile $PIDFILE --retry 10
     log_end_msg $?
 }

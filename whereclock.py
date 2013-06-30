@@ -8,8 +8,11 @@ import socket
 import re
 from datetime import datetime
 import pygame
+import argparse
 import RPi.GPIO as GPIO
 from Stepper import Motor
+
+# CONFIGURATION BEGINS ########################################
 
 # Set up stepper-motor:
 GPIO.setmode(GPIO.BOARD)
@@ -28,16 +31,23 @@ location = {
     'mortalperil': 315,  # traditionally must be included
     }
 
+# Port for the web server to run on
+port = 4387
+
+# Sound file to play when the hand moves
+sound_file = '/usr/share/scratch/Media/Sounds/Effects/BellToll.wav'
+
+# CONFIGURATION ENDS ############################################
+
 # Standard socket stuff:
 host = ''  # do we need socket.gethostname() ?
-port = 4387
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((host, port))
 sock.listen(1)  # don't queue up any requests, this is not a high traffic web service...
 
 # pygame things for sound
 pygame.init()
-sound = pygame.mixer.Sound('/home/pi/where-clock/ZINGBONK.WAV')
+sound = pygame.mixer.Sound(sound_file)
 
 print "Server running on port " + `port`
 
